@@ -1,4 +1,4 @@
-# 🧾 # Rapido Ride Analytics &  Performance – Power BI, SQL
+# 🧾 Rapido Ride Analytics &  Performance – Power BI, SQL
 
 _Analyzing ride-hailing efficiency, cancellations, revenue patterns, and customer experience to support operational decision-making using SQL and Power BI._
 
@@ -11,9 +11,7 @@ _Analyzing ride-hailing efficiency, cancellations, revenue patterns, and custome
 - <a href="#tools--technologies">Tools & Technologies</a>
 - <a href="#project-structure">Project Structure</a>
 - <a href="#data-cleaning--preparation">Data Cleaning & Preparation</a>
-- <a href="#sql-analysis">SQL Analysis</a>
 - <a href="#dashboard">Dashboard</a>
-- <a href="#dax-measures">DAX Measures</a>
 - <a href="#research-questions--key-findings">Research Questions & Key Findings</a>
 - <a href="#how-to-run-this-project">How to Run This Project</a>
 - <a href="#final-recommendations">Final Recommendations</a>
@@ -60,7 +58,7 @@ Efficient ride management is critical for customer satisfaction and revenue opti
 
 <h2><a class="anchor" id="project-structure"></a>Project Structure</h2>
 
----bash
+```
 
 Rapido Ride Analytics &  Performance
 │
@@ -81,8 +79,7 @@ Rapido Ride Analytics &  Performance
 │ └──image4.png 
 │
 └── Rapido Ride Analytics & Operational Performance.pdf
-
----
+```
 
 
 ---
@@ -97,29 +94,6 @@ Rapido Ride Analytics &  Performance
 
 ---
 
-<h2><a class="anchor" id="sql-analysis"></a>SQL Analysis</h2>
-
-Key SQL queries used for analysis:
-
-```sql
--- Successful Bookings
-SELECT * FROM bookings 
-WHERE Booking_Status = 'Success';
-
--- Top 5 Customers
-SELECT Customer_ID, COUNT(Booking_ID) AS total_rides
-FROM bookings
-GROUP BY Customer_ID
-ORDER BY total_rides DESC
-LIMIT 5;
-
--- Total Revenue
-SELECT SUM(Booking_Value) AS total_revenue
-FROM bookings
-WHERE Booking_Status = 'Success';
-
----
-
 <h2><a class="anchor" id="dashboard"></a>Dashboard</h2>
 
 Power BI dashboard provides:
@@ -130,36 +104,12 @@ Power BI dashboard provides:
 - Cancellation trends
 - Ratings analysis
 
-![Rapido Ride Analytics & Operational Performance](Images/image1.png)
+![Rapido-Ride-Analytics---Performance-PowerBI-SQL](Image/image1.png)
 
----
-
-<h2><a class="anchor" id="dax-measures"></a>DAX Measures</h2>
-
-Key DAX measures:
-
--- Total Rides
-Total Rides = COUNT(Bookings[Booking_ID])
-
--- Total Revenue
-Total Revenue = SUM(Bookings[Booking_Value])
-
--- Cancelled Rides
-Total Cancelled Rides =
-CALCULATE(
-    COUNT(Bookings[Booking_ID]),
-    Bookings[Booking_Status] <> "Success"
-)
-
--- Driver Cancellation %
-Driver Cancel % =
-DIVIDE(
-    CALCULATE(COUNT(Bookings[Booking_ID]), Bookings[Booking_Status] = "Canceled by Driver"),
-    [Total Rides]
-)
 
 ---
 <h2><a class="anchor" id="research-questions--key-findings"></a>Research Questions & Key Findings</h2>
+
 - Cancellation Trends: Driver cancellations are higher than customer cancellations
 - Revenue Analysis: Revenue is concentrated in key locations
 - Vehicle Performance: Premium and Bike segments perform strongly
@@ -169,16 +119,39 @@ DIVIDE(
 ---
 
 <h2><a class="anchor" id="how-to-run-this-project"></a>How to Run This Project</h2>
-1. Clone the repository:
-git clone https://github.com/mahimakumari2/Rapido-Ride-Analytics---Performance-PowerBI-SQL.git
-2. Open Power BI Dashboard:
-  -  dashboard/rapido_dashboard.pbix
-3. Load dataset if required
-  -  Explore dashboard using filters
 
+1. Clone the repository:
+```bash
+git clone https://github.com/mahimakumari2/rapido-ride-analysis.git
+```
+2. Navigate to the project folder:
+```bash
+cd rapido-ride-analysis
+```
+3. Load the dataset:
+```bash
+Open the dataset from the /data folder (CSV/Excel file)
+Ensure column names match the Power BI model
+```
+4. Run SQL queries (optional):
+```bash
+Open sql/rapido_queries.sql in MySQL Workbench or any SQL tool
+Execute queries to explore data and create views
+```
+5. Open Power BI dashboard:
+```bash
+Open dashboard/rapido_dashboard.pbix in Power BI Desktop
+Click on Refresh to load data
+```
+6. Explore the dashboard:
+```bash
+Use filters (Vehicle Type, Location, Payment Method)
+Analyze trends, cancellations, revenue, and ratings
+```
 ---
 
 <h2><a class="anchor" id="final-recommendations"></a>Final Recommendations</h2>
+
 - Reduce driver cancellations through incentives
 - Improve vehicle availability in high-demand areas
 - Promote digital payment methods
